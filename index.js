@@ -87,7 +87,10 @@ export function handleFlippidyCommand(...args) {
 /**
  * Handler für den /fdebug Befehl
  */
-export function handleDebugCommand() {
+export function handleDebugCommand(...args) {
+    // Debug-Ausgabe hinzufügen
+    Utils.debug(`handleDebugCommand wurde aufgerufen mit Argumenten: ${args.join(', ')}`);
+    
     Utils.setDebugging(!Utils.getDebugging());
     Utils.log(`Debugging ${Utils.getDebugging() ? "aktiviert" : "deaktiviert"}.`);
     Utils.playSound("random.click", 1.0, Utils.getDebugging() ? 1.2 : 0.8);

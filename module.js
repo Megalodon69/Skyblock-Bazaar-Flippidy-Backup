@@ -43,13 +43,13 @@ register("command", function(...args) {
     }
 }).setName("flippidy").setAliases(["flip"]);
 
-register("command", function() {
+register("command", function(...args) {
     ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: /fdebug Befehl wurde aufgerufen!");
     
     try {
         const mainModule = require("./index");
         if (mainModule && typeof mainModule.handleDebugCommand === 'function') {
-            mainModule.handleDebugCommand();
+            mainModule.handleDebugCommand(...args);
             ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: handleDebugCommand in index.js wurde aufgerufen");
         } else {
             ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: Debug-Modus umgeschaltet");
