@@ -1,89 +1,89 @@
 # Skyblock-Bazaar-Flippidy
 
-Ein vollautomatisches ChatTriggers-Modul für Hypixel Skyblock Bazaar Flipping. Dieses Modul automatisiert den Prozess des Kaufens und Verkaufens von Items im Bazaar, um Gewinn zu erzielen.
+A fully automated ChatTriggers module for Hypixel Skyblock Bazaar Flipping. This module automates the process of buying and selling items in the Bazaar to generate profit.
 
-## Funktionen
+## Features
 
-- **Vollautomatisches Flipping**: Identifiziert die profitabelsten Flips und führt sie automatisch aus
-- **Mehrere gleichzeitige Flips**: Kann mehrere Kauf- und Verkaufsaufträge parallel verwalten
-- **In-Game UI**: Benutzerfreundliche Oberfläche zur Steuerung und Überwachung
-- **Marktmanipulationsschutz**: Vermeidet Items, die möglicherweise manipuliert werden
-- **Automatisches Bazaar-Öffnen**: Kann den Bazaar automatisch über den /bz-Befehl öffnen
-- **Debug-Modus**: Ausführliche Protokollierung für Fehlerbehebung und Transparenz
+- **Fully Automated Flipping**: Identifies the most profitable flips and executes them automatically
+- **Multiple Concurrent Flips**: Can manage multiple buy and sell orders in parallel
+- **In-Game UI**: User-friendly interface for control and monitoring
+- **Market Manipulation Protection**: Avoids items that might be manipulated
+- **Automatic Bazaar Opening**: Can open the Bazaar automatically using the /bz command
+- **Debug Mode**: Detailed logging for troubleshooting and transparency
 
 ## Installation
 
-### Voraussetzungen
+### Prerequisites
 
-1. **Minecraft** mit Forge für Version 1.8.9
-2. **ChatTriggers** installiert für Forge 1.8.9 (Version 2.0 oder höher)
-3. Zugang zu **Hypixel Skyblock**
+1. **Minecraft** with Forge for version 1.8.9
+2. **ChatTriggers** installed for Forge 1.8.9 (version 2.0 or higher)
+3. Access to **Hypixel Skyblock**
 
-### Installationsschritte
+### Installation Steps
 
-1. **ChatTriggers installieren** (falls noch nicht installiert):
-   - Lade die neueste Version von [ChatTriggers](https://www.chattriggers.com/) herunter
-   - Lege die .jar-Datei in deinem Minecraft mods-Ordner ab
-   - Starte Minecraft neu
+1. **Install ChatTriggers** (if not already installed):
+   - Download the latest version from [ChatTriggers](https://www.chattriggers.com/)
+   - Place the .jar file in your Minecraft mods folder
+   - Restart Minecraft
 
-2. **Bazaar Flippidy installieren**:
-   - Öffne Minecraft und gehe zu Hypixel
-   - Führe den Befehl `/ct import BazaarFlippidy` aus
-   - Alternativ:
-     - Lade dieses Repository als ZIP herunter
-     - Extrahiere es in deinen `.minecraft/config/ChatTriggers/modules/` Ordner
-     - Führe `/ct reload` in Minecraft aus
+2. **Install Bazaar Flippidy**:
+   - Open Minecraft and connect to Hypixel
+   - Run the command `/ct import BazaarFlippidy`
+   - Alternatively:
+     - Download this repository as a ZIP
+     - Extract it to your `.minecraft/config/ChatTriggers/modules/` folder
+     - Run `/ct reload` in Minecraft
 
-3. **Erste Verwendung**:
-   - Vergewissere dich, dass du genügend Münzen zum Flipping hast
-   - Führe `/flippidy` aus, um die Benutzeroberfläche zu öffnen
-   - Gehe zum Bazaar oder verwende `/bz`, um den Bazaar zu öffnen
-   - Klicke auf "Start" in der UI oder führe `/flippidy start` aus, um zu beginnen
+3. **First Use**:
+   - Make sure you have enough coins for flipping
+   - Run `/flippidy` to open the user interface
+   - Go to the Bazaar or use `/bz` to open the Bazaar
+   - Click "Start" in the UI or run `/flippidy start` to begin
 
-## Verwendung
+## Usage
 
-### Befehle
+### Commands
 
-- `/flippidy` oder `/flip` - Öffnet die Hauptbenutzeroberfläche
-- `/flippidy help` - Zeigt die Hilfe-Seite mit allen Befehlen an
-- `/flippidy start` - Startet das automatische Flipping
-- `/flippidy stop` - Stoppt das automatische Flipping
-- `/flippidy settings` - Zeigt die aktuellen Einstellungen an
-- `/fdebug` oder `/flippidydebug` - Aktiviert oder deaktiviert den Debug-Modus
+- `/flippidy` or `/flip` - Opens the main user interface
+- `/flippidy help` - Shows the help page with all commands
+- `/flippidy start` - Starts automatic flipping
+- `/flippidy stop` - Stops automatic flipping
+- `/flippidy settings` - Shows the current settings
+- `/fdebug` or `/flippidydebug` - Activates or deactivates debug mode
 
-### Benutzeroberfläche
+### User Interface
 
-Die Benutzeroberfläche kann durch Klicken und Ziehen der Titelleiste verschoben werden und bietet folgende Funktionen:
+The user interface can be moved by clicking and dragging the title bar and offers the following functions:
 
-- Anzeige des aktuellen Status
-- Liste der aktiven Flips mit Gewinnangaben
-- Start- und Stop-Buttons zur Steuerung
-- Ein- und Ausklappen der Oberfläche mit dem ▼/▶-Button
+- Display of current status
+- List of active flips with profit information
+- Start and stop buttons for control
+- Collapse and expand the interface with the ▼/▶ button
 
-### Optimale Einstellungen
+### Optimal Settings
 
-Die Standardeinstellungen sind für die meisten Benutzer geeignet, können aber bei Bedarf in der `config.js`-Datei angepasst werden:
+The default settings are suitable for most users but can be adjusted in the `config.js` file if needed:
 
-- `minProfitPercentage`: Minimale Gewinnspanne in Prozent (Standard: 3%)
-- `minProfitAmount`: Minimaler Gewinnbetrag in Münzen (Standard: 1000)
-- `maxConcurrentFlips`: Maximale Anzahl gleichzeitiger Flips (Standard: 3)
+- `minProfitPercentage`: Minimum profit margin in percent (default: 3%)
+- `minProfitAmount`: Minimum profit amount in coins (default: 1000)
+- `maxConcurrentFlips`: Maximum number of concurrent flips (default: 3)
 
-## Sicherheitshinweise
+## Safety Notes
 
-- **Marktmanipulation**: Das Modul verfügt über einen Schutz gegen Marktmanipulation, der dazu beiträgt, risikoreiche Flips zu vermeiden.
-- **API-Rate Limits**: Das Modul berücksichtigt die Hypixel API-Beschränkungen, um temporäre Sperren zu vermeiden.
-- **Minecraft ToS**: Die Verwendung erfolgt auf eigene Gefahr. Stelle sicher, dass die Verwendung mit den Hypixel- und Minecraft-Nutzungsbedingungen übereinstimmt.
+- **Market Manipulation**: The module has protection against market manipulation which helps avoid risky flips.
+- **API Rate Limits**: The module takes into account Hypixel API limitations to avoid temporary bans.
+- **Minecraft ToS**: Use at your own risk. Make sure usage complies with Hypixel and Minecraft terms of service.
 
-## Fehlerbehebung
+## Troubleshooting
 
-- **UI wird nicht angezeigt**: Versuche, `/ct reload` auszuführen oder Minecraft neu zu starten
-- **Flipping startet nicht**: Überprüfe, ob du im Bazaar bist und der API-Zugriff funktioniert
-- **Fehler beim API-Zugriff**: Aktiviere den Debug-Modus mit `/fdebug` für detailliertere Fehlerinformationen
+- **UI not showing**: Try running `/ct reload` or restart Minecraft
+- **Flipping won't start**: Check if you're in the Bazaar and the API access is working
+- **API access errors**: Enable debug mode with `/fdebug` for more detailed error information
 
-## Mitwirkung
+## Contributing
 
-Beiträge zum Projekt sind willkommen! Du kannst das Projekt forken und Pull-Requests einreichen, um Verbesserungen vorzuschlagen.
+Contributions to the project are welcome! You can fork the project and submit pull requests to suggest improvements.
 
-## Lizenz
+## License
 
-Dieses Projekt steht unter der MIT-Lizenz - siehe die [LICENSE](LICENSE)-Datei für Details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
