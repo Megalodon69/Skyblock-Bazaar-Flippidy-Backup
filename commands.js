@@ -1,14 +1,14 @@
 // Befehlsbehandlung für Bazaar Flippidy
-import { startFlipping, stopFlipping, debugging, playerPurse } from './index';
-import Settings from './config';
-import * as Utils from './utils';
-import UI from './ui';
-import * as ProfitTracker from './profitTracker';
+const { startFlipping, stopFlipping, debugging, playerPurse } = require('./index');
+const Settings = require('./config');
+const Utils = require('./utils');
+const UI = require('./ui');
+const ProfitTracker = require('./profitTracker');
 
 /**
  * Registriert alle Befehle für das Modul
  */
-export function registerCommands() {
+function registerCommands() {
     // Haupt-Befehl mit Unterbefehlsverarbeitung
     register("command", (...args) => {
         Utils.log(`Befehl /flippidy mit Argumenten: ${args.join(' ')}`, true);
@@ -112,3 +112,8 @@ function showPurse() {
         Utils.log("Konnte den Münzstand nicht abrufen. Bist du auf Skyblock?", true);
     }
 }
+
+// Exportieren der Funktionen für andere Module
+module.exports = {
+    registerCommands
+};
