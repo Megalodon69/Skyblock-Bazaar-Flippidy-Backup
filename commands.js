@@ -11,18 +11,23 @@ import * as ProfitTracker from './profitTracker';
 export function registerCommands() {
     // Haupt-Befehl mit Unterbefehlsverarbeitung
     register("command", (...args) => {
+        Utils.log(`Befehl /flippidy mit Argumenten: ${args.join(' ')}`, true);
+
         if (args.length === 0) {
             // Wenn keine Argumente angegeben sind, zeige die Hauptbenutzeroberfläche an
+            Utils.log("Öffne die Hauptbenutzeroberfläche...", true);
             UI.toggleMainUI();
             return;
         }
         
         switch (args[0].toLowerCase()) {
             case "help":
+                Utils.log("Zeige Hilfe...", true);
                 Utils.showHelp();
                 break;
                 
             case "start":
+                Utils.log("Starte Flipping...", true);
                 if (!Utils.isOnHypixelSkyblock()) {
                     Utils.log("Du musst dich auf Hypixel SkyBlock befinden, um das Flipping zu starten!", true);
                     Utils.playSound("note.bass", 0.8, 0.5);
@@ -32,34 +37,38 @@ export function registerCommands() {
                 break;
                 
             case "stop":
+                Utils.log("Stoppe Flipping...", true);
                 stopFlipping();
                 break;
                 
             case "settings":
+                Utils.log("Zeige Einstellungen...", true);
                 showSettings();
                 break;
                 
             case "bz":
             case "bazaar":
+                Utils.log("Öffne Bazaar...", true);
                 Utils.openBazaar();
                 break;
                 
             case "stats":
-            case "stat":
-            case "profit":
+                Utils.log("Zeige Statistiken...", true);
                 ProfitTracker.showStatistics();
                 break;
                 
             case "resetstats":
+                Utils.log("Setze Statistiken zurück...", true);
                 ProfitTracker.resetSessionStats();
                 break;
 
             case "purse":
+                Utils.log("Zeige Geldbeutel...", true);
                 showPurse();
                 break;
                 
             default:
-                Utils.log("Unbekannter Befehl. Benutze /flippidy help für Hilfe.");
+                Utils.log("Unbekannter Befehl. Benutze /flippidy help für Hilfe.", true);
                 break;
         }
     }).setName("flippidy").setAliases(["flip"]);

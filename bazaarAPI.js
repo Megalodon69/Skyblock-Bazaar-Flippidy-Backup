@@ -81,7 +81,7 @@ function requestBazaarData() {
  * @param {number} maxItems Die maximale Anzahl von Items, die zurückgegeben werden sollen
  * @returns {Array<object>} Eine Liste der besten Flip-Möglichkeiten
  */
-export function findBestFlips(bazaarData, maxItems = 10) {
+export function findBestFlips(bazaarData, maxItems = 14) {
     const flips = [];
     
     // Für jedes Produkt in den Bazaar-Daten
@@ -100,7 +100,7 @@ export function findBestFlips(bazaarData, maxItems = 10) {
         if (!buyPrice || !sellPrice || buyPrice <= 0 || sellPrice <= 0) return;
         
         // Berechne den potenziellen Gewinn
-        const profit = sellPrice - buyPrice - (buyPrice * 0.01); // Berücksichtige 1% Bazaar-Steuer
+        const profit = sellPrice - buyPrice - (buyPrice * 0.0125); // Berücksichtige 1.25% Bazaar-Steuer
         const profitPercentage = (profit / buyPrice) * 100;
         
         // Überprüfe, ob der Gewinn den Mindestanforderungen entspricht
