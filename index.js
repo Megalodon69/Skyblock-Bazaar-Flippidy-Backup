@@ -10,7 +10,6 @@ import * as ProfitTracker from './profitTracker';
 
 // Globale Variablen
 export let inBazaar = false;
-export let debugging = false;
 export let running = false;
 export let activeFlips = [];
 export let waitingForSell = [];
@@ -24,17 +23,16 @@ const Flippidy = {
     description: "Automatisches Bazaar Flipping für Hypixel Skyblock"
 };
 
-// WICHTIG: Direkte Befehlsregistrierung für die Hauptbefehle
-// Diese müssen direkt hier in der Hauptdatei sein, damit sie korrekt geladen werden
-register("command", handleFlippidyCommand).setName("flippidy").setAliases(["flip"]);
-register("command", handleDebugCommand).setName("fdebug").setAliases(["flippidydebug"]);
-
 /**
  * Handler für den /flippidy Befehl mit allen Unterbefehlen
  */
 export function handleFlippidyCommand(...args) {
+    // Debug-Ausgabe hinzufügen
+    Utils.debug(`handleFlippidyCommand wurde aufgerufen mit Argumenten: ${args.join(', ')}`);
+    
     if (args.length === 0) {
         // Wenn keine Argumente angegeben sind, zeige die Hauptbenutzeroberfläche an
+        Utils.debug("Keine Argumente, öffne UI...");
         UI.toggleMainUI();
         return;
     }
@@ -90,9 +88,9 @@ export function handleFlippidyCommand(...args) {
  * Handler für den /fdebug Befehl
  */
 export function handleDebugCommand() {
-    debugging = !debugging;
-    Utils.log(`Debugging ${debugging ? "aktiviert" : "deaktiviert"}.`);
-    Utils.playSound("random.click", 1.0, debugging ? 1.2 : 0.8);
+    Utils.setDebugging(!Utils.getDebugging());
+    Utils.log(`Debugging ${Utils.getDebugging() ? "aktiviert" : "deaktiviert"}.`);
+    Utils.playSound("random.click", 1.0, Utils.getDebugging() ? 1.2 : 0.8);
 }
 
 /**

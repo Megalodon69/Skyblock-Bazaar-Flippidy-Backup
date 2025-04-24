@@ -1,6 +1,8 @@
 // Hilfsfunktionen für das Bazaar Flippidy Modul
-import { debugging } from './index';
 import Settings from './config';
+
+// Variable für den Debug-Status, die jetzt direkt in dieser Datei verwaltet wird
+let isDebugging = true; // Standardmäßig aktiviert für Fehlerbehebung
 
 // Chatfarben für Minecraft
 export const COLORS = {
@@ -45,9 +47,25 @@ export function log(message, showPrefix = true) {
  * @param {string} message Die auszugebende Debug-Nachricht
  */
 export function debug(message) {
-    if (debugging) {
+    if (isDebugging) {
         log(`${COLORS.GRAY}[DEBUG] ${message}${COLORS.RESET}`);
     }
+}
+
+/**
+ * Aktiviert oder deaktiviert den Debug-Status
+ * @param {boolean} status Der neue Status (true für aktiviert, false für deaktiviert)
+ */
+export function setDebugging(status) {
+    isDebugging = status;
+}
+
+/**
+ * Ruft den aktuellen Debug-Status ab
+ * @returns {boolean} Der aktuelle Debug-Status
+ */
+export function getDebugging() {
+    return isDebugging;
 }
 
 /**

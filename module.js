@@ -1,46 +1,59 @@
 // BazaarFlippidy - ChatTriggers Modul
-// Alternativer Einstiegspunkt für die Befehlsregistrierung
+// Haupteinstiegspunkt für ChatTriggers
 
-// Befehlsregistrierung direkt in der obersten Ebene für maximale Kompatibilität
-register("command", (...args) => {
-    // Leite weiter zur eigentlichen Implementierung
-    const mainModule = require("./index");
-    if (mainModule && typeof mainModule.handleFlippidyCommand === 'function') {
-        mainModule.handleFlippidyCommand.apply(null, args);
-    } else {
-        // Fallback, falls die Hauptimplementierung nicht verfügbar ist
+// Debug-Nachricht zur Überwachung der Modulladung
+ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: module.js wird geladen...");
+
+// Befehlsregistrierung - DIREKT mit einfachen Funktionen ohne Imports
+register("command", function(...args) {
+    ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: /flippidy Befehl wurde aufgerufen!");
+    
+    try {
+        // Versuche, Haupt-UI zu öffnen
         if (args.length === 0) {
             ChatLib.chat("§5[§dBazaarFlippidy§5]§r Öffne UI...");
-            // Versuche UI zu öffnen, falls verfügbar
-            try {
-                const UI = require("./ui");
-                if (UI && typeof UI.toggleMainUI === 'function') {
-                    UI.toggleMainUI();
-                }
-            } catch (error) {
-                ChatLib.chat("§5[§dBazaarFlippidy§5]§r Fehler beim Öffnen der UI: " + error);
+            
+            // Direkt UI-Datei importieren
+            const UI = require("./ui");
+            if (UI && typeof UI.toggleMainUI === 'function') {
+                UI.toggleMainUI();
+                ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: UI.toggleMainUI() wurde aufgerufen");
+            } else {
+                ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: UI.toggleMainUI ist keine Funktion");
             }
-            return;
         }
-        
-        // Grundlegende Hilfe
-        if (args[0] === "help") {
-            ChatLib.chat("§e=== BazaarFlippidy Hilfe ===§r");
-            ChatLib.chat("/flippidy - Öffnet die Hauptoberfläche");
-            ChatLib.chat("/flippidy help - Zeigt diese Hilfeseite an");
-            ChatLib.chat("§e=========================§r");
+        // Hauptfunktionalität aus index.js laden
+        else {
+            try {
+                const mainModule = require("./index");
+                if (mainModule && typeof mainModule.handleFlippidyCommand === 'function') {
+                    mainModule.handleFlippidyCommand.apply(null, args);
+                    ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: handleFlippidyCommand in index.js wurde aufgerufen");
+                } else {
+                    ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: handleFlippidyCommand in index.js konnte nicht aufgerufen werden");
+                }
+            } catch (e) {
+                ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: Fehler beim Ausführen: " + e.toString());
+            }
         }
+    } catch (e) {
+        ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: Fehler: " + e.toString());
     }
 }).setName("flippidy").setAliases(["flip"]);
 
-register("command", () => {
-    // Leite weiter zur eigentlichen Debug-Implementierung
-    const mainModule = require("./index");
-    if (mainModule && typeof mainModule.handleDebugCommand === 'function') {
-        mainModule.handleDebugCommand();
-    } else {
-        // Fallback, falls die Hauptimplementierung nicht verfügbar ist
-        ChatLib.chat("§5[§dBazaarFlippidy§5]§r Debug-Modus umgeschaltet.");
+register("command", function() {
+    ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: /fdebug Befehl wurde aufgerufen!");
+    
+    try {
+        const mainModule = require("./index");
+        if (mainModule && typeof mainModule.handleDebugCommand === 'function') {
+            mainModule.handleDebugCommand();
+            ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: handleDebugCommand in index.js wurde aufgerufen");
+        } else {
+            ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: Debug-Modus umgeschaltet");
+        }
+    } catch (e) {
+        ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: Fehler beim Debug-Umschalten: " + e.toString());
     }
 }).setName("fdebug").setAliases(["flippidydebug"]);
 
