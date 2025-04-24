@@ -1,0 +1,13 @@
+{
+  "name": "BazaarFlippidy",
+  "version": "1.0.0",
+  "author": "GitHub Copilot",
+  "description": "Automatisches Bazaar Flipping für Hypixel Skyblock",
+  "entry": "module.js",
+  "requires": [
+    "Vigilance",
+    "requestV2"
+  ],
+  "isRequired": false,
+  "isCore": false
+}
