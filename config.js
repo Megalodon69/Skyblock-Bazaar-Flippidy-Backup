@@ -15,9 +15,9 @@ class Settings {
         this.minProfitPercentage = 3.0; // Mindestgewinnspanne in Prozent
         this.minProfitAmount = 1000; // Mindestgewinn in Münzen
         this.maxItems = 50; // Maximale Anzahl von Items, die für Flips berücksichtigt werden
-        this.maxConcurrentFlips = 3; // Maximale Anzahl gleichzeitiger Flips
-        this.maxItemAmount = 64; // Maximale Anzahl eines Items pro Flip
-        this.minItemVolume = 10000; // Minimales Handelsvolumen für ein Item
+        this.maxConcurrentFlips = 13; // Maximale Anzahl gleichzeitiger Flips
+        this.maxItemAmount = 1024; // Maximale Anzahl eines Items pro Flip
+        this.minItemVolume = 10; // Minimales Handelsvolumen für ein Item
         
         // Budget-Einstellungen
         this.minPurseSafety = 100000; // Mindestbetrag an Münzen, der im Konto verbleiben sollte

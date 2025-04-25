@@ -10,7 +10,9 @@ const ProfitTracker = require('./profitTracker');
  */
 function registerCommands() {
     // Haupt-Befehl mit Unterbefehlsverarbeitung
-    register("command", (...args) => {
+    register("command", function() {
+        // Konvertiere arguments object in ein sicheres Array
+        const args = Array.prototype.slice.call(arguments);
         Utils.log(`Befehl /flippidy mit Argumenten: ${args.join(' ')}`, true);
 
         if (args.length === 0) {
@@ -74,7 +76,9 @@ function registerCommands() {
     }).setName("flippidy").setAliases(["flip"]);
     
     // Debug-Befehl
-    register("command", (...args) => {
+    register("command", function() {
+        // Konvertiere arguments object in ein sicheres Array
+        const args = Array.prototype.slice.call(arguments);
         // Ändere den Debug-Status
         debugging = !debugging;
         Utils.log(`Debugging ${debugging ? "aktiviert" : "deaktiviert"}.`);
