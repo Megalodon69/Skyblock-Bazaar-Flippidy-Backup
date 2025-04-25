@@ -35,7 +35,7 @@ class Settings {
         
         // Marktmanipulationsschutz
         this.enableManipulationProtection = true;
-        this.maxPriceGap = 1.5; // Maximales Verhältnis zwischen Verkaufs- und Kaufpreis
+        this.maxPriceGap = 1000000; // Maximales Verhältnis zwischen Verkaufs- und Kaufpreis
         this.maxVolumeChangePercent = 50; // Maximale Änderung des Handelsvolumens in Prozent
         this.maxPriceChangePercent = 20; // Maximale Preisänderung in Prozent
         

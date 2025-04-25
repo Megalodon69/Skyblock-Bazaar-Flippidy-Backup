@@ -27,9 +27,7 @@ register("command", function(...args) {
             try {
                 const mainModule = require("./index");
                 if (mainModule && typeof mainModule.handleFlippidyCommand === 'function') {
-                    // Stelle sicher, dass args definiert ist, bevor es verwendet wird
-                    const safeArgs = args || [];
-                    mainModule.handleFlippidyCommand(...safeArgs);
+                    mainModule.handleFlippidyCommand(...args);
                     ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: handleFlippidyCommand in index.js wurde aufgerufen");
                 } else {
                     ChatLib.chat("§5[§dBazaarFlippidy§5]§r DEBUG: handleFlippidyCommand in index.js konnte nicht aufgerufen werden");
