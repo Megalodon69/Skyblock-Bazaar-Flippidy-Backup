@@ -200,28 +200,31 @@ function hasSufficientBudget(cost) {
 }
 
 // Funktion zum Finden und Ausführen von Flips
-async function findAndExecuteFlips() {
+function findAndExecuteFlips() {
     if (!running) return;
     
     Utils.debug("Suche nach profitablen Flips...");
     
     try {
-        const bazaarData = await BazaarAPI.fetchBazaarData();
-        const bestFlips = BazaarAPI.findBestFlips(bazaarData, Settings.maxItems);
-        
-        bestFlips.forEach(async (flip) => {
-            if (activeFlips.length < Settings.maxConcurrentFlips) {
-                const totalCost = flip.buyPrice * flip.amount;
-                
-                // Überprüfe, ob genügend Budget vorhanden ist
-                if (Settings.useBudgetCheck && !hasSufficientBudget(totalCost)) {
-                    Utils.debug(`Überspringe Flip für ${flip.itemId} wegen unzureichendem Budget (${Utils.formatNumber(totalCost)} benötigt)`);
-                    return;
+        BazaarAPI.fetchBazaarData().then(bazaarData => {
+            const bestFlips = BazaarAPI.findBestFlips(bazaarData, Settings.maxItems);
+            
+            bestFlips.forEach(flip => {
+                if (activeFlips.length < Settings.maxConcurrentFlips) {
+                    const totalCost = flip.buyPrice * flip.amount;
+                    
+                    // Überprüfe, ob genügend Budget vorhanden ist
+                    if (Settings.useBudgetCheck && !hasSufficientBudget(totalCost)) {
+                        Utils.debug(`Überspringe Flip für ${flip.itemId} wegen unzureichendem Budget (${Utils.formatNumber(totalCost)} benötigt)`);
+                        return;
+                    }
+                    
+                    Utils.debug(`Beginne Flip für ${flip.itemId}: Kaufe für ${flip.buyPrice}, verkaufe für ${flip.sellPrice}, Gewinn: ${flip.profit}%`);
+                    executeFlip(flip);
                 }
-                
-                Utils.debug(`Beginne Flip für ${flip.itemId}: Kaufe für ${flip.buyPrice}, verkaufe für ${flip.sellPrice}, Gewinn: ${flip.profit}%`);
-                await executeFlip(flip);
-            }
+            });
+        }).catch(error => {
+            Utils.log(`Fehler beim Abrufen der Bazaar-Daten: ${error}`, true);
         });
     } catch (error) {
         Utils.log(`Fehler beim Finden von Flips: ${error}`, true);
