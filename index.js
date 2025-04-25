@@ -238,7 +238,7 @@ function findAndExecuteFlips() {
 }
 
 // Funktion zum Ausführen eines Flips
-async function executeFlip(flip) {
+function executeFlip(flip) {
     try {
         // Hier würde die tatsächliche Implementierung der Kauf- und Verkaufslogik sein
         // Da dies aber komplex ist und von ChatTriggers' API abhängt, ist dies ein vereinfachtes Beispiel

@@ -13,35 +13,38 @@ let lastFetchTimestamp = 0;
  * Abrufen von Bazaar-Daten von der Hypixel API
  * @returns {Promise<object>} Die Bazaar-Daten
  */
-export async function fetchBazaarData() {
-    // Überprüfe, ob wir gecachte Daten verwenden können
-    const now = Date.now();
-    if (cachedBazaarData && now - lastFetchTimestamp < (Settings.scanInterval * 0.9)) {
-        Utils.debug("Verwende gecachte Bazaar-Daten");
-        return cachedBazaarData;
-    }
-    
-    Utils.debug("Hole neue Bazaar-Daten von der API");
-    
-    try {
-        // Echte API-Anfrage mit requestV2
-        const response = await requestBazaarData();
-        
-        // Überprüfe, ob die Antwort erfolgreich ist
-        if (!response || !response.success) {
-            throw new Error("Fehler bei der API-Anfrage");
+export function fetchBazaarData() {
+    return new Promise((resolve, reject) => {
+        // Überprüfe, ob wir gecachte Daten verwenden können
+        const now = Date.now();
+        if (cachedBazaarData && now - lastFetchTimestamp < (Settings.scanInterval * 0.9)) {
+            Utils.debug("Verwende gecachte Bazaar-Daten");
+            resolve(cachedBazaarData);
+            return;
         }
         
-        // Speichere die Daten im Cache
-        cachedBazaarData = response.products;
-        lastFetchTimestamp = now;
+        Utils.debug("Hole neue Bazaar-Daten von der API");
         
-        Utils.debug(`Bazaar-Daten erfolgreich geholt mit ${Object.keys(response.products).length} Produkten`);
-        return cachedBazaarData;
-    } catch (error) {
-        Utils.log(`Fehler beim Abrufen von Bazaar-Daten: ${error}`, true);
-        throw error;
-    }
+        // Echte API-Anfrage mit requestV2
+        requestBazaarData()
+            .then(response => {
+                // Überprüfe, ob die Antwort erfolgreich ist
+                if (!response || !response.success) {
+                    throw new Error("Fehler bei der API-Anfrage");
+                }
+                
+                // Speichere die Daten im Cache
+                cachedBazaarData = response.products;
+                lastFetchTimestamp = now;
+                
+                Utils.debug(`Bazaar-Daten erfolgreich geholt mit ${Object.keys(response.products).length} Produkten`);
+                resolve(cachedBazaarData);
+            })
+            .catch(error => {
+                Utils.log(`Fehler beim Abrufen von Bazaar-Daten: ${error}`, true);
+                reject(error);
+            });
+    });
 }
 
 /**
